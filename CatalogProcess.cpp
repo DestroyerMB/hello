@@ -22,12 +22,20 @@ void DetailsProcess(CString input_file_name,CString link_start,CString link_stop
   if(start_pos>=0 && stop_pos>=0 && stop_pos>start_pos)
   {
     CString address=data.Mid(start_pos,stop_pos-start_pos);
+    
     //start job to get next page
-    !!!
+    CString next_page;
+    next_page.Format(_T("%d"),atoi(input_file_name)+1);
+    AsyncJob* job=new AsyncJob;
+    job->type=GET_PAGE;
+    job->address=address;
+    job->data=next_page;
+    job_queue->Add(job);
   }
   
   //find all links to details
   bool find=true;
+  int link_num=0;
   while(find)
   {
     start_pos=data.Find(link_start);
@@ -36,8 +44,15 @@ void DetailsProcess(CString input_file_name,CString link_start,CString link_stop
     {
       CString address=data.Mid(start_pos,stop_pos-start_pos);
       data=data.Right(data.GetLength()-stop_pos);
+      
       //start job to get details page
-      !!!
+      CString details_page;
+      details_page.Format(_T("_%d!%d"),atoi(input_file_name),++link_num);
+      AsyncJob* job=new AsyncJob;
+      job->type=GET_PAGE;
+      job->address=address;
+      job->data=details_page;
+      job_queue->Add(job);
     }
     else find=false;
   }
