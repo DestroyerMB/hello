@@ -1,4 +1,4 @@
-void DetailsProcess(CString input_file_name,CString link_start,CString link_stop,CString nex_page_start,CString nex_page_stop)
+CString DetailsProcess(CString input_file_name,CString link_start,CString link_stop,CString nex_page_start,CString nex_page_stop)
 {
   
   FILE *input_file = _wfopen(connectFilePath, _T("rb")); 
@@ -57,11 +57,8 @@ void DetailsProcess(CString input_file_name,CString link_start,CString link_stop
     else find=false;
   }
   
-  FILE *otput_file=fopen(output_file_name,"a");
-  if(!output_file) otput_file=fopen(output_file_name,"w");
-  if(!output_file) return;
-  fputs(output_fie,result,1);
-  
   fclose(input_file);
   fclose(output_file);
+  
+  return result;
 }
