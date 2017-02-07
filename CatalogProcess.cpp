@@ -58,7 +58,6 @@ CString DetailsProcess(CString input_file_name,CString link_start,CString link_s
   }
   
   fclose(input_file);
-  fclose(output_file);
   
   return result;
 }
