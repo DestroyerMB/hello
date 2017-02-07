@@ -1,4 +1,4 @@
-void DetailsProcess(CString input_file_name,CStringArray names,CStringArray starts,CStringArray stops,CString output_file_name)
+void DetailsProcess(CString input_file_name,CString link_start,CString link_stop,CString nex_page_start,CString nex_page_stop)
 {
   
   FILE *input_file = _wfopen(connectFilePath, _T("rb")); 
@@ -16,19 +16,32 @@ void DetailsProcess(CString input_file_name,CStringArray names,CStringArray star
   data = lpContent;
   free(lpContent); 
   
-  for(int phrase=0;phrase<names.GetCount();phrase++)
+  //find next page
+  int start_pos=data.Find(link_start);
+  int stop_pos=data.Find(link_stop);
+  if(start_pos>=0 && stop_pos>=0 && stop_pos>start_pos)
   {
-    CString start_phrase=starts[phrase];
-    CString stop_phrase=stops[phrase];
-    int start_pos=data.Find(start_phrase);
-    int stop_pos=data.Find(stop_phrase);
+    CString address=data.Mid(start_pos,stop_pos-start_pos);
+    data=data.Right(data.GetLength()-stop_pos);
+    //start job to get details page
+    !!!
+  }
+  
+  //find all links to details
+  bool find=true;
+  while(find)
+  {
+    int start_pos=data.Find(link_start);
+    int stop_pos=data.Find(link_stop);
     if(start_pos>=0 && stop_pos>=0 && stop_pos>start_pos)
     {
-      if(!resut.IsEmpty()) result+=_T(",");
-      result+=data.Mid(start_pos,stop_pos-start_pos);
+      CString address=data.Mid(start_pos,stop_pos-start_pos);
+      data=data.Right(data.GetLength()-stop_pos);
+      //start job to get details page
+      !!!
     }
+    else find=false;
   }
-  result+=_T("\n");
   
   FILE *otput_file=fopen(output_file_name,"a");
   if(!output_file) otput_file=fopen(output_file_name,"w");
