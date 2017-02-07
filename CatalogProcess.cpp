@@ -17,13 +17,12 @@ void DetailsProcess(CString input_file_name,CString link_start,CString link_stop
   free(lpContent); 
   
   //find next page
-  int start_pos=data.Find(link_start);
-  int stop_pos=data.Find(link_stop);
+  int start_pos=data.Find(next_page_start);
+  int stop_pos=data.Find(next_page_stop);
   if(start_pos>=0 && stop_pos>=0 && stop_pos>start_pos)
   {
     CString address=data.Mid(start_pos,stop_pos-start_pos);
-    data=data.Right(data.GetLength()-stop_pos);
-    //start job to get details page
+    //start job to get next page
     !!!
   }
   
@@ -31,8 +30,8 @@ void DetailsProcess(CString input_file_name,CString link_start,CString link_stop
   bool find=true;
   while(find)
   {
-    int start_pos=data.Find(link_start);
-    int stop_pos=data.Find(link_stop);
+    start_pos=data.Find(link_start);
+    stop_pos=data.Find(link_stop);
     if(start_pos>=0 && stop_pos>=0 && stop_pos>start_pos)
     {
       CString address=data.Mid(start_pos,stop_pos-start_pos);
