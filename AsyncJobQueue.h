@@ -20,6 +20,7 @@ private:
 	AsyncJob *first,*last;
 	int max_id;
 	int max_jobs;
+	int job_count;
 
 public:
 	HANDLE h_WakeUpEvent,h_TerminateEvent;
@@ -39,7 +40,7 @@ public:
 	AsyncJob* GetJob();
 	void Done(int id,CString result_data);
 
-	void Internal(AsyncJob* job);
+	int GetJobCount() { return job_count; }
 };
 
 #endif //_ASYNC_JOB_QUEUE_
