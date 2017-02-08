@@ -55,6 +55,21 @@ void CSpiderDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_NAME_START_SHIFT, m_NameStartShift);
 	DDX_Control(pDX, IDC_PHONE_START_SHIFT, m_PhoneStartShift);
 	DDX_Control(pDX, IDC_EMAIL_START_SHIFT, m_EmailStartShift);
+	DDX_Control(pDX, IDC_ADDRESS_START, m_AddressStart);
+	DDX_Control(pDX, IDC_OKRES_START, m_OkresStart);
+	DDX_Control(pDX, IDC_KRAJ_START, m_KrajStart);
+	DDX_Control(pDX, IDC_BUSINESS_START, m_BusinessStart);
+	DDX_Control(pDX, IDC_WEB_START, m_WebStart);
+	DDX_Control(pDX, IDC_ADDRESS_ATOP, m_AddressStop);
+	DDX_Control(pDX, IDC_OKRES_STOP, m_OkresStop);
+	DDX_Control(pDX, IDC_KRAJ_STOP, m_KrajStop);
+	DDX_Control(pDX, IDC_BUSINESS_STOP, m_BusinessStop);
+	DDX_Control(pDX, IDC_WEB_STOP, m_WebStop);
+	DDX_Control(pDX, IDC_ADDRESS_START_SHIFT, m_AddressStartShift);
+	DDX_Control(pDX, IDC_OKRES_START_SHIFT, m_OkresStartShift);
+	DDX_Control(pDX, IDC_KRAJ_START_SHIFT, m_KrajStartShift);
+	DDX_Control(pDX, IDC_BUSINESS_START_SHIFT, m_BusinessStartShift);
+	DDX_Control(pDX, IDC_WEB_START_SHIFT, m_WebStartShift);
 	DDX_Control(pDX, IDC_STATIC_FIRMS, m_StaticFirms);
 	DDX_Control(pDX, IDC_STATIC_CATALOG, m_StaticCatalog);
 	DDX_Control(pDX, IDC_STATIC_DETAILS, m_StaticDetails);
@@ -153,6 +168,22 @@ void CSpiderDlg::OnBnClickedOk()
 	m_NameStartShift.GetWindowText(name_shift);
 	m_PhoneStartShift.GetWindowText(phone_shift);
 	m_EmailStartShift.GetWindowText(email_shift);
+	
+	m_AddressStart.GetWindowText(address_start);
+	m_OkresStart.GetWindowText(okres_start);
+	m_KrajStart.GetWindowText(kraj_start);
+	m_BusinessStart.GetWindowText(business_start);
+	m_WebStart.GetWindowText(web_start);
+	m_AddressStop.GetWindowText(address_stop);
+	m_OkresStop.GetWindowText(okres_stop);
+	m_KrajStop.GetWindowText(kraj_stop);
+	m_BusinessStop.GetWindowText(business_stop);
+	m_WebStop.GetWindowText(web_stop);
+	m_AddressStartShift.GetWindowText(address_start_shift);
+	m_OkresStartShift.GetWindowText(okres_start_shift);
+	m_KrajStartShift.GetWindowText(kraj_start_shift);
+	m_BusinessStartShift.GetWindowText(business_start_shift);
+	m_WebStartShift.GetWindowText(web_start_shift);
 	
 	catalog_pages_processed=0;
 	details_pages_processed=0;
