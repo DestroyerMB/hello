@@ -28,7 +28,7 @@ typedef void (*callback)(AsyncJob* job);
 class AsyncJob
 {	
 public:
-	int id,job_type,status;
+	int id,job_type,status,return_code;
 	CString name,address,data,result_data,user,password,mandatory_url_start;
 	callback callback_function;
 	CString details_link_start,details_link_stop,next_page_start,next_page_stop;
