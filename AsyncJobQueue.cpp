@@ -133,7 +133,7 @@ void GetPage(CString address,CString data,CString &result_data)
 }
 
 void ProcessCatalog(AsyncJobQueue* job_queue,CString input_file_name,CString link_start,CString link_start_shift,CString link_stop,
-					CString next_page_start,CString next_page_shift,CString next_page_stop)
+					CString next_page_start,CString next_page_shift,CString next_page_stop,CString mandatory_url_part)
 {
 	CString data = LoadUtf8FileToString(input_file_name);
 
@@ -384,7 +384,7 @@ DWORD WINAPI DoAsyncJob(LPVOID lpParams)
 				GetPage(job->address,job->data,result_data);
 			else if(job->job_type==PROCESS_CATALOG)
 				ProcessCatalog(job_queue,job->data,job->details_link_start,job->details_shift,job->details_link_stop,
-								job->next_page_start,job->next_page_shift,job->next_page_stop);
+								job->next_page_start,job->next_page_shift,job->next_page_stop,job->mandatory_url_part);
 			else result_data=ProcessDetails(job->data,job->names,job->starts,job->stops); 
 			
 			//set result and get next job
