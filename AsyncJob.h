@@ -29,7 +29,7 @@ class AsyncJob
 {	
 public:
 	int id,job_type,status;
-	CString name,address,data,result_data,user,password;
+	CString name,address,data,result_data,user,password,mandatory_url_start;
 	callback callback_function;
 	CString details_link_start,details_link_stop,next_page_start,next_page_stop;
 	CString details_shift,next_page_shift;
