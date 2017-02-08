@@ -199,7 +199,7 @@ BOOL CSpiderDlg::OnCommand(WPARAM wParam,LPARAM lParam)
 					CString s;
 					s.Format(_T("%d"),++catalog_pages_processed);
 					m_StaticCatalog.SetWindowText(_T("Catalog pages: ")+s);
-					m_StaticCatalog.RedrawWindow();
+					RedrawWindow();
 				}
 				else 
 				{
@@ -222,12 +222,19 @@ BOOL CSpiderDlg::OnCommand(WPARAM wParam,LPARAM lParam)
 					CString s;
 					s.Format(_T("%d"),++details_pages_processed);
 					m_StaticDetails.SetWindowText(_T("Details pages: ")+s);
-					m_StaticDetails.RedrawWindow();
+					RedrawWindow();
 				}
 			}
 			else if(job_type==PROCESS_CATALOG)
 			{
-				;;;
+				if(return_code==1) //we go through all the catalog pages
+				{
+					//update status
+					CString s;
+					s.Format(_T("%d"),catalog_pages_processed);
+					m_StaticCatalog.SetWindowText(_T("Catalog pages: ")+s+_T(" DONE"));
+					RedrawWindow();
+				}
 			}
 			else if(job_type==PROCESS_DETAILS)
 			{
@@ -243,7 +250,7 @@ BOOL CSpiderDlg::OnCommand(WPARAM wParam,LPARAM lParam)
 					CString s;
 					s.Format(_T("%d"),++firms_processed);
 					m_StaticFirms.SetWindowText(_T("Firms: ")+s);
-					m_StaticFirms.RedrawWindow();
+					RedrawWindow();
 					
 					SetWindowText(_T("Spider: ")+s);
 				}
