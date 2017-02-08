@@ -108,6 +108,16 @@ BOOL CSpiderDlg::OnInitDialog()
 	m_PhoneStop.SetWindowText(_T("</td>"));
 	m_EmailStart.SetWindowText(_T("href=\"mai&#108;&#116;&#111;&#58;"));
 	m_EmailStop.SetWindowText(_T("?body="));
+	m_AddressStart.SetWindowText(_T(""));
+	m_AddressStop.SetWindowText(_T(""));
+	m_OkresStart.SetWindowText(_T(""));
+	m_OkresStop.SetWindowText(_T(""));
+	m_KrajStart.SetWindowText(_T(""));
+	m_KrajStop.SetWindowText(_T(""));
+	m_WebStart.SetWindowText(_T(""));
+	m_WebStop.SetWindowText(_T(""));
+	m_BusinessStart.SetWindowText(_T(""));
+	m_BusinessStop.SetWindowText(_T(""));
 
 	job_queue=new AsyncJobQueue(this->m_hWnd);
 
