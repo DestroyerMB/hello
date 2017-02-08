@@ -225,6 +225,10 @@ BOOL CSpiderDlg::OnCommand(WPARAM wParam,LPARAM lParam)
 					m_StaticDetails.RedrawWindow();
 				}
 			}
+			else if(job_type==PROCESS_CATALOG)
+			{
+				;;;
+			}
 			else if(job_type==PROCESS_DETAILS)
 			{
 				CString output_file_name=GetCwd()+_T("\\results.csv");
