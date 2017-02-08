@@ -80,8 +80,15 @@ int StartWithShift(CString data,int start_pos,CString shift,CString catalog_page
 	return start_pos;
 }
 
-void GetPage(CString address,CString data,CString &result_data)
+CString FullAddress(CString address,CString mandatory_url_part)
 {
+	if(address.Find(mandatory_url_part)<0)
+		address=mandatory_url_part+address;
+	return address;
+}
+
+void GetPage(CString address,CString data,CString &result_data)
+{	
 	SECURITY_ATTRIBUTES sa;
     sa.nLength = sizeof(sa);
     sa.lpSecurityDescriptor = NULL;
@@ -150,6 +157,7 @@ void ProcessCatalog(AsyncJobQueue* job_queue,CString input_file_name,CString lin
 		start_pos=StartWithShift(data,start_pos+len,next_page_shift,page_num);
 		
 		CString address=data.Mid(start_pos,stop_pos-start_pos);
+		address=FullAddress(address,mandatory_url_part);
     
 		//start job to get next page
 		CString next_page;
@@ -175,6 +183,7 @@ void ProcessCatalog(AsyncJobQueue* job_queue,CString input_file_name,CString lin
 			start_pos=StartWithShift(data,start_pos+len,link_start_shift,page_num);
 			
 			CString address=data.Mid(start_pos,stop_pos-start_pos);
+			address=FullAddress(address,mandatory_url_part);
 			data=data.Right(data.GetLength()-stop_pos);
       
 			//start job to get details page
