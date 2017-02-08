@@ -242,6 +242,7 @@ AsyncJobQueue::AsyncJobQueue(HWND hEventReceiver)
 	max_id=0;
 	max_jobs=ASYNC_JOB_MAX_JOBS;
 	m_hEventReceiver=hEventReceiver;
+	job_count=0;
 
 	h_WakeUpEvent=CreateEvent(NULL,FALSE,FALSE,NULL);
 	h_TerminateEvent=CreateEvent(NULL,FALSE,FALSE,NULL);
@@ -273,6 +274,8 @@ int AsyncJobQueue::Add(AsyncJob* new_job)
 {
 	EnterCriticalSection(&m_csAsync);
 	
+	++job_count;
+	
 	if(last) 
 	{
 		last->next=new_job;
@@ -294,6 +297,8 @@ int AsyncJobQueue::Add(AsyncJob* new_job)
 
 AsyncJob* AsyncJobQueue::Remove(int id)
 {
+	--job_count;
+	
 	AsyncJob *pointer=first,*prev_pointer=NULL;
 	while(pointer)
 	{
