@@ -132,7 +132,7 @@ void GetPage(CString address,CString data,CString &result_data)
 	CloseHandle( h );
 }
 
-void ProcessCatalog(AsyncJobQueue* job_queue,CString input_file_name,CString link_start,CString link_start_shift,CString link_stop,
+bool ProcessCatalog(AsyncJobQueue* job_queue,CString input_file_name,CString link_start,CString link_start_shift,CString link_stop,
 					CString next_page_start,CString next_page_shift,CString next_page_stop,CString mandatory_url_part)
 {
 	CString data = LoadUtf8FileToString(input_file_name);
@@ -383,8 +383,12 @@ DWORD WINAPI DoAsyncJob(LPVOID lpParams)
 			if(job->job_type==GET_PAGE)
 				GetPage(job->address,job->data,result_data);
 			else if(job->job_type==PROCESS_CATALOG)
-				ProcessCatalog(job_queue,job->data,job->details_link_start,job->details_shift,job->details_link_stop,
-								job->next_page_start,job->next_page_shift,job->next_page_stop,job->mandatory_url_part);
+			{
+				bool have_next_page=ProcessCatalog(job_queue,job->data,job->details_link_start,job->details_shift,job->details_link_stop,
+												job->next_page_start,job->next_page_shift,job->next_page_stop,job->mandatory_url_part);
+				if(!have_next_page) //send event
+					PostMessage(m_hEventReceiver,WM_COMMAND,ASYNC_JOB_CATALOG_DONE,pointer->id);
+			}
 			else result_data=ProcessDetails(job->data,job->names,job->starts,job->stops); 
 			
 			//set result and get next job
