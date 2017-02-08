@@ -38,6 +38,7 @@ void CSpiderDlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_TEMPLATE, m_Template);
 	DDX_Control(pDX, IDC_START_PAGE, m_StartPage);
+	DDX_Control(pDX, IDC_MANDATORY_URL_PART, m_MandatoryUrlPart);
 	DDX_Control(pDX, IDC_PAUSE, m_Pause);
 	DDX_Control(pDX, IDC_DETAILS_START, m_DetailsStart);
 	DDX_Control(pDX, IDC_DETAILS_STOP, m_DetailsStop);
@@ -78,6 +79,7 @@ BOOL CSpiderDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	m_StartPage.SetWindowText(_T("https://firmy.abc.cz/potraviny-a-napoje/"));
+	m_MandatoryUrlPart.SetWindowText(_T("https://firmy.abc.cz"));
 	m_DetailsStart.SetWindowText(_T("<div class=\"item_content clearfix\">"));
 	m_DetailsStartShift.SetWindowText(_T("21"));
 	m_DetailsStop.SetWindowText(_T("\">"));
