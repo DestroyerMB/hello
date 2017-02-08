@@ -58,6 +58,7 @@ void CSpiderDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_FIRMS, m_StaticFirms);
 	DDX_Control(pDX, IDC_STATIC_CATALOG, m_StaticCatalog);
 	DDX_Control(pDX, IDC_STATIC_DETAILS, m_StaticDetails);
+	DDX_Control(pDX, IDC_STATIC_JOB_COUNT, m_StaticJobCount);
 }
 
 BEGIN_MESSAGE_MAP(CSpiderDlg, CDialogEx)
@@ -199,7 +200,6 @@ BOOL CSpiderDlg::OnCommand(WPARAM wParam,LPARAM lParam)
 					CString s;
 					s.Format(_T("%d"),++catalog_pages_processed);
 					m_StaticCatalog.SetWindowText(_T("Catalog pages: ")+s);
-					RedrawWindow();
 				}
 				else 
 				{
@@ -222,7 +222,6 @@ BOOL CSpiderDlg::OnCommand(WPARAM wParam,LPARAM lParam)
 					CString s;
 					s.Format(_T("%d"),++details_pages_processed);
 					m_StaticDetails.SetWindowText(_T("Details pages: ")+s);
-					RedrawWindow();
 				}
 			}
 			else if(job_type==PROCESS_CATALOG)
@@ -233,7 +232,6 @@ BOOL CSpiderDlg::OnCommand(WPARAM wParam,LPARAM lParam)
 					CString s;
 					s.Format(_T("%d"),catalog_pages_processed);
 					m_StaticCatalog.SetWindowText(_T("Catalog pages: ")+s+_T(" DONE"));
-					RedrawWindow();
 				}
 			}
 			else if(job_type==PROCESS_DETAILS)
@@ -250,13 +248,16 @@ BOOL CSpiderDlg::OnCommand(WPARAM wParam,LPARAM lParam)
 					CString s;
 					s.Format(_T("%d"),++firms_processed);
 					m_StaticFirms.SetWindowText(_T("Firms: ")+s);
-					RedrawWindow();
 					
 					SetWindowText(_T("Spider: ")+s);
 				}
 			}
 		}
-
+		
+		CString s;
+		s.Format(_T("Jobs: %d"),job_queue->GetJobCount());
+		m_StaticJobCount.SetWindowText(s);
+		RedrawWindow();
 	}
 
 	if(wParam==ASYNC_JOB_ADD || wParam==ASYNC_JOB_PROCESSED || wParam==ASYNC_JOB_DONE || wParam==ASYNC_JOB_REMOVE) return true;
