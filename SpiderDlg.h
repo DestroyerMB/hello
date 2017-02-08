@@ -59,4 +59,5 @@ public:
 	long firms_processed,catalog_pages_processed,details_pages_processed;
 	CStatic m_StaticCatalog;
 	CStatic m_StaticDetails;
+	CStatic m_StaticJobCount;
 };
