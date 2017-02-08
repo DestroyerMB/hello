@@ -132,9 +132,10 @@ void GetPage(CString address,CString data,CString &result_data)
 	CloseHandle( h );
 }
 
-bool ProcessCatalog(AsyncJobQueue* job_queue,CString input_file_name,CString link_start,CString link_start_shift,CString link_stop,
+int ProcessCatalog(AsyncJobQueue* job_queue,CString input_file_name,CString link_start,CString link_start_shift,CString link_stop,
 					CString next_page_start,CString next_page_shift,CString next_page_stop,CString mandatory_url_part)
 {
+	int return_code=0;
 	CString data = LoadUtf8FileToString(input_file_name);
 
 	CString page_num;
@@ -168,6 +169,7 @@ bool ProcessCatalog(AsyncJobQueue* job_queue,CString input_file_name,CString lin
 		job->data=next_page;
 		job_queue->Add(job);
 	}
+	else return_code=1;
   
 	//find all links to details
 	bool find=true;
@@ -199,6 +201,8 @@ bool ProcessCatalog(AsyncJobQueue* job_queue,CString input_file_name,CString lin
 	}
   
 	DeleteFile(input_file_name);
+	
+	return return_code;
 }
 
 CString ProcessDetails(CString input_file_name,std::vector<CString> names,std::vector<CString> starts,std::vector<CString> stops)
@@ -384,10 +388,8 @@ DWORD WINAPI DoAsyncJob(LPVOID lpParams)
 				GetPage(job->address,job->data,result_data);
 			else if(job->job_type==PROCESS_CATALOG)
 			{
-				bool have_next_page=ProcessCatalog(job_queue,job->data,job->details_link_start,job->details_shift,job->details_link_stop,
+				job->return_code=ProcessCatalog(job_queue,job->data,job->details_link_start,job->details_shift,job->details_link_stop,
 												job->next_page_start,job->next_page_shift,job->next_page_stop,job->mandatory_url_part);
-				if(!have_next_page) //send event
-					PostMessage(m_hEventReceiver,WM_COMMAND,ASYNC_JOB_CATALOG_DONE,pointer->id);
 			}
 			else result_data=ProcessDetails(job->data,job->names,job->starts,job->stops); 
 			
