@@ -52,7 +52,8 @@ public:
 	CEdit m_NameStartShift;
 	CEdit m_PhoneStartShift;
 	CEdit m_EmailStartShift;
-	CString start_page,details_start,details_stop,next_page_start,next_page_stop,name_start,name_stop,phone_start,phone_stop,email_start,email_stop;
+	CEdit m_MandatoryUrlPart;
+	CString start_page,mandatory_url_part,details_start,details_stop,next_page_start,next_page_stop,name_start,name_stop,phone_start,phone_stop,email_start,email_stop;
 	CString details_shift,next_page_shift,name_shift,phone_shift,email_shift;
 	CStatic m_StaticFirms;
 	long firms_processed,catalog_pages_processed,details_pages_processed;
