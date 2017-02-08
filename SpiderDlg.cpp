@@ -133,6 +133,7 @@ HCURSOR CSpiderDlg::OnQueryDragIcon()
 void CSpiderDlg::OnBnClickedOk()
 {
 	m_StartPage.GetWindowText(start_page);
+	m_MandatoryUrlPart.GetWindowText(mandatory_url_part);
 	m_DetailsStart.GetWindowText(details_start);
 	m_DetailsStop.GetWindowText(details_stop);
 	m_NextPageStart.GetWindowText(next_page_start);
@@ -183,6 +184,7 @@ BOOL CSpiderDlg::OnCommand(WPARAM wParam,LPARAM lParam)
 					AsyncJob* new_job=new AsyncJob;
 					new_job->job_type=PROCESS_CATALOG;
 					new_job->data=result_data;
+					job->mandatory_url_part=mandatory_url_part;
 					new_job->details_link_start=details_start;
 					new_job->details_shift=details_shift;
 					new_job->details_link_stop=details_stop;
